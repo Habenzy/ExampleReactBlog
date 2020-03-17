@@ -5,11 +5,11 @@ class Greeting extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.props.changeGreeting}>
+        <form >
           <input type='text' name='newGreeting'/>
           <input type='submit' />
         </form>
-        <h1>{this.props.greeting}</h1>
+        <h1>Hello</h1>
       </div>
     )
   }
