@@ -3,21 +3,33 @@ import './App.css';
 import Header from './Header';
 import Clock from './Clock';
 
-function App(props) {
+class App extends React.Component {
 
-  let ids = ['1', '2', '3', '4', '5']
+  constructor(props){
+    super(props)
 
-  return (
-    <div className="App">
-      <Clock />
-      <h1>{props.greeting}</h1>
+    this.state= {
+      postsDisplayed: false
+    }
+  }
 
-      {ids.map((id) => {
-        return <Header someKey='some value' userId={id} key={id}/>
-      })}
+  togglePostDisplay = () => {
+    this.setState((previousState => {
+      return {
+        postsDisplayed: !previousState.postsDisplayed
+      }
+    }))
+  }
 
-    </div>
-  );
+  render() {
+    return (
+      <div className="App">
+        <Clock />
+        <Header displayPosts={this.togglePostDisplay} />
+        {this.state.postsDisplayed ? <h3>Here's all the posts!</h3>: null}
+      </div>
+    );
+  }
 }
 
 export default App;

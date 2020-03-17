@@ -1,32 +1,17 @@
 import React from 'react'
-import Greeting from './Greeting'
+
 
 class Header extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      someKey: '',
-      prevVal: 'initial value',
-      greeting: "Why hello, hello"
+
     }
   }
 
   componentDidMount() {
     this.getUserData()
-  }
-
-  componentDidUpdate() {
-
-    if (this.state.someKey !== this.state.prevVal) {
-
-      console.log('Some Key has changed')
-
-      this.setState({
-        prevVal: this.state.someKey
-      })
-    }
-    
   }
 
   getUserData = () => {
@@ -41,21 +26,16 @@ class Header extends React.Component {
       })
   }
 
-  changeGreeting = (event) => {
-    event.preventDefault()
-    console.log(event.target)
-
-    this.setState({
-      greeting: event.target.newGreeting.value
-    })
-  }
-
   render() {
 
     return (
       <div className='head' >
-        <Greeting changeGreeting={this.changeGreeting} greeting={this.state.greeting} />
-        <h1>{this.state.userData ? this.state.userData[this.props.userId].name : "Loading . . . "}</h1>
+        {this.state.userData ?
+          this.state.userData.map((user) => {
+            return <h4 key={user.id} onClick={this.props.displayPosts}>{user.name}</h4>
+          })
+          : <h1>Loading . . . </h1>
+        }
       </div>
     )
   }
